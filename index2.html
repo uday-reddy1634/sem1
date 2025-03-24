@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .task-manager {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      padding: 20px;
+    }
+
+    .task-manager h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .task-input-container {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .task-input-container input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+    }
+
+    .task-input-container button {
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+
+    .task-input-container button:hover {
+      background: #218838;
+    }
+
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .task-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      color: #555;
+    }
+
+    .task-list li:last-child {
+      border-bottom: none;
+    }
+
+    .task-list button {
+      padding: 5px 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .task-list button:hover {
+      background: darkred;
+    }
+
+    .note {
+      color: red;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="task-manager">
+    <h1>Task Manager</h1>
+    <div class="task-input-container">
+      <input type="text" id="taskInput" placeholder="Enter a task...">
+      <button onclick="addTask()">Add Task</button>
+    </div>
+    <ul class="task-list" id="taskList">
+      <li>
+        Wakeup early morning
+        <button onclick="deleteTask(this)">Delete</button>
+      </li>
+    </ul>
+    <p class="note">* Click the "Delete" button to remove a task.</p>
+  </div>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+
+      if (taskInput.value.trim() !== '') {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          ${taskInput.value}
+          <button onclick="deleteTask(this)">Delete</button>
+        `;
+        taskList.appendChild(listItem);
+        taskInput.value = '';
+      }
+    }
+
+    function deleteTask(button) {
+      const taskItem = button.parentElement;
+      taskItem.remove();
+    }
+  </script>
+</body>
+</html>
